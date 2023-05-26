@@ -1,0 +1,10 @@
+.container {
+  margin: auto;
+  padding: 100px;
+}
+
+.articlesList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}

@@ -1,0 +1,11 @@
+.caption {
+  color: black;
+}
+
+.caption:hover {
+  text-decoration: none;
+}
+
+.card:hover {
+  text-decoration: none;
+}
