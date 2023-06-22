@@ -49,19 +49,19 @@ const Homepage = () => {
 
   const profilePic = localStorage.getItem("userProfilePic");
 
-  setTimeout(() => {
+  const showMenu = () => {
     setOpen(!open);
-  }, 5000);
+    setTimeout(() => {
+      setOpen(!open);
+    }, 2000);
+  };
 
   return (
     <div className="container">
       <Header />
 
       <div className="menu-icon">
-        {!open && (
-          <FaBars className="hamburger" onClick={() => setOpen(!open)} />
-        )}
-
+        <FaBars className="hamburger" onMouseEnter={showMenu} />
         {open && (
           <Modal profilePic={profilePic} handleSignout={handleSignOut} />
         )}
