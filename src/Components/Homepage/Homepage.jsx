@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import "./Homepage.css";
 import axios from "axios";
 import Article from "./Article";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import loadingGif from "./giphy.gif";
+import { FaSearch, FaBars } from "react-icons/fa";
+import Modal from "./Modal";
 
 const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
-  const [fave, isFav] = useState(false);
-
-  const [favList, setFavList] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -45,31 +47,49 @@ const Homepage = () => {
     setLoading(false);
   };
 
+  const profilePic = localStorage.getItem("userProfilePic");
+
+  setTimeout(() => {
+    setOpen(!open);
+  }, 5000);
+
   return (
     <div className="container">
-      <header>Welcome to NewsApp</header>
+      <Header />
 
-      <div>
-        <Link to="/profile" className="profile">
-          <img src={localStorage.getItem("userProfilePic")} alt="profilepic" />
-        </Link>
-        <button onClick={handleSignOut}>Sign out</button>
+      <div className="menu-icon">
+        {!open && (
+          <FaBars className="hamburger" onClick={() => setOpen(!open)} />
+        )}
+
+        {open && (
+          <Modal profilePic={profilePic} handleSignout={handleSignOut} />
+        )}
       </div>
 
       <form onSubmit={handleSubmit}>
         <input
+          className="search-bar"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button type="submit"> Search</button>
+        <button type="submit" className="searchSubmitButton">
+          <FaSearch />
+        </button>
       </form>
 
-      {loading ? <p> "Loading...."</p> : ""}
+      {loading ? (
+        <div>
+          {" "}
+          <img src={loadingGif} alt="loading..." />{" "}
+        </div>
+      ) : (
+        ""
+      )}
 
       <div className="articlesList">
         {articles.map((x, idx) => (
           <Article
-            favorite={isFav}
             key={idx}
             img={x.media}
             link={x.link}

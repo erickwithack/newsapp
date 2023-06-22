@@ -1,10 +1,49 @@
 .container {
   margin: auto;
-  padding: 100px;
+  padding: 20px;
 }
 
 .articlesList {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+}
+
+.profileImg {
+  border-radius: 50%;
+  margin-right: 10px;
+  height: 50px;
+  width: 50px;
+}
+
+.search-bar {
+  border-radius: 30px;
+  padding: 3px 15px;
+  width: 90%;
+  margin-right: 7px;
+}
+
+.searchSubmitButton {
+  all: unset;
+  height: 2em;
+  width: 1.5em;
+}
+
+.searchSubmitButton:hover {
+  cursor: pointer;
+}
+
+.menu-icon {
+  position: absolute;
+  right: 51px;
+  margin-top: -5vw;
+}
+
+.hamburger {
+  width: 50px;
+  height: 29px;
+}
+
+.hamburger:hover {
+  cursor: pointer;
 }
