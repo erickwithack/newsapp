@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Article.css";
 import { Link } from "react-router-dom";
-import { Card, Col, Button } from "react-bootstrap";
+import { FaHeart } from "react-icons/fa";
 
 const Article = ({
   img,
@@ -12,30 +12,24 @@ const Article = ({
   author,
   favorite,
 }) => {
-  const [fav, setFav] = useState(favorite);
-
-  const makeFav = () => {
-    setFav(!fav);
-  };
   return (
-    <Col md="4">
-      <Card>
-        <Card.Title onClick={makeFav}>{fav ? "❤️" : "♡"}</Card.Title>
+    <section className="articleCard">
+      <div className="article">
+        {favorite ? <FaHeart style={{ color: "red" }} /> : <FaHeart />}
+      </div>
+      <Link to={link}>
+        <img src={img} alt="Avatar" />
+      </Link>
 
-        <Card.Body className="caption">
-          <Card.Title>{title}</Card.Title>
-          <Card.Text>
-            By <span>{author} </span> <span>{publishedDate}</span> <br />
-            {excerpt}
-          </Card.Text>
-          <Button>
-            <Link to={link}>
-              <Card.Img variant="top" src={img} alt="Avatar" />
-            </Link>
-          </Button>
-        </Card.Body>
-      </Card>
-    </Col>
+      <div className="card-caption">
+        <h2>{title}</h2>
+
+        <div>
+          By <span>{author} </span> <span>{publishedDate}</span> <br />
+          <p>{excerpt}</p>
+        </div>
+      </div>
+    </section>
   );
 };
 

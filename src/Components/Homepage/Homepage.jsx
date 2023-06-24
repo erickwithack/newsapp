@@ -24,28 +24,23 @@ const Homepage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    let maxArticles = 30;
+    let country = "us";
 
-    let config = {
-      headers: {
-        "x-api-key": "KKZC1YTOpFh6tCFqScuTR7v1OpdNWtDGbIyNvs24UoA",
-      },
-      params: {
-        q: searchQuery,
-        lang: "en",
-        sort_by: "relevancy",
-        page: 1,
-      },
-    };
+    let apiKey = "d5b9d0d11f744c03ea2e92c237cce6b3";
+    let url = `https://gnews.io/api/v4/search?q=${searchQuery}&lang=en&country=${country}&max=${maxArticles}&apikey=${apiKey}`;
 
-    const result = await axios.get(
-      `https://api.newscatcherapi.com/v2/search?`,
-      config
-    );
+    const result = await axios.get(url);
 
     const articles = result.data.articles;
+    console.log(articles);
     setArticles(articles);
     setLoading(false);
   };
+
+  // new api call
+
+  //
 
   const profilePic = localStorage.getItem("userProfilePic");
 
@@ -91,11 +86,10 @@ const Homepage = () => {
         {articles.map((x, idx) => (
           <Article
             key={idx}
-            img={x.media}
-            link={x.link}
-            excerpt={x.excerpt}
-            publishedDate={x.published_date}
-            author={x.author}
+            img={x.image}
+            link={x.url}
+            excerpt={x.description}
+            publishedDate={x.publishedAt}
           />
         ))}
       </div>
