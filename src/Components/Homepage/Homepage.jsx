@@ -38,10 +38,6 @@ const Homepage = () => {
     setLoading(false);
   };
 
-  // new api call
-
-  //
-
   const profilePic = localStorage.getItem("userProfilePic");
 
   const showMenu = () => {
@@ -88,7 +84,7 @@ const Homepage = () => {
             key={idx}
             img={x.image}
             link={x.url}
-            excerpt={x.description}
+            excerpt={x.content}
             publishedDate={x.publishedAt}
           />
         ))}
